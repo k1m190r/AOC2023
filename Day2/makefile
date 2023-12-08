@@ -1,7 +1,7 @@
 NAME = day1
 CFILE = main
 CPP = g++-12
-CFLAGS = -O0 -std=c++20 -g -pthread
+CFLAGS = -O0 -std=c++23 -g -pthread
 LDLIBS = `pkg-config --libs fmt`
 
 $(NAME): $(CFILE).o
