@@ -2,6 +2,8 @@
     "C_Cpp.default.cppStandard": "c++20",
     "files.associations": {
         "ostream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     },
 }

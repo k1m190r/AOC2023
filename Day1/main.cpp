@@ -22,5 +22,5 @@ int main() {
     int v = v1 * 10 + v2;
     sum += v;
   }
-  print("sum: {}\n", sum);
+  print("sum: '{}'\n", sum);
 }
