@@ -22,6 +22,9 @@ bool is_digi_start(char c) {
 
 char maybe_digi(string s) {
   auto cs = s.c_str();
+  
+  if (!is_digi_start(cs[0])) return ' ';
+
   switch (cs[0]) {
     case 'o':  // one
       if (0 == strncmp(cs, "one", 3)) return '1';
@@ -68,10 +71,8 @@ int main() {
     for (int i = 0; const char c : line) {
       if ((c >= 0x30) && (c <= 0x39)) nums.push_back(c);
 
-      if (is_digi_start(c)) {
-        auto digi = maybe_digi(line.substr(i));
-        if (digi != ' ') nums.push_back(digi);
-      };
+      auto digi = maybe_digi(line.substr(i));
+      if (digi != ' ') nums.push_back(digi);
       i++;
     }
 
