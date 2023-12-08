@@ -20,37 +20,42 @@ bool is_digi_start(char c) {
   return false;
 }
 
+bool is_digi(const char* s, string dig) {
+  auto len = dig.size();
+  return (0 == strncmp(s, dig.c_str(), len));
+}
+
 char maybe_digi(string s) {
   auto cs = s.c_str();
-  
+
   if (!is_digi_start(cs[0])) return ' ';
 
   switch (cs[0]) {
     case 'o':  // one
-      if (0 == strncmp(cs, "one", 3)) return '1';
+      if (is_digi(cs, "one")) return '1';
       break;
 
     case 't':  // two three
-      if (0 == strncmp(cs, "two", 3)) return '2';
-      if (0 == strncmp(cs, "three", 5)) return '3';
+      if (is_digi(cs, "two")) return '2';
+      if (is_digi(cs, "three")) return '3';
       break;
 
     case 'f':  // four five
-      if (0 == strncmp(cs, "four", 4)) return '4';
-      if (0 == strncmp(cs, "five", 4)) return '5';
+      if (is_digi(cs, "four")) return '4';
+      if (is_digi(cs, "five")) return '5';
       break;
 
     case 's':  // six seven
-      if (0 == strncmp(cs, "six", 3)) return '6';
-      if (0 == strncmp(cs, "seven", 5)) return '7';
+      if (is_digi(cs, "six")) return '6';
+      if (is_digi(cs, "seven")) return '7';
       break;
 
     case 'e':  // eight
-      if (0 == strncmp(cs, "eight", 5)) return '8';
+      if (is_digi(cs, "eight")) return '8';
       break;
 
     case 'n':  // nine
-      if (0 == strncmp(cs, "nine", 4)) return '9';
+      if (is_digi(cs, "nine")) return '9';
       break;
   }
 
