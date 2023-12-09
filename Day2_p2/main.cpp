@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <map>
 #include <tuple>
+#include "../demangle.h"
 
 using fmt::print, fmt::format;
 using std::ifstream, std::getline;
@@ -23,24 +24,28 @@ vector<string> split(string text, char delim) {
 }
 
 // split into int and color, strip all whitespaces
-tuple<int, string> get_color_score(string text) {
+tuple<int, int> get_color_score(string text) {
   stringstream num{};
   stringstream color{};
+  static map<string, int> color_map{{"red", 0}, {"green", 1}, {"blue", 2}};
+
   for (auto c : text) {
     // 0x30 .. 0x39 = 0 .. 9
     if ((c >= 0x30) && (c <= 0x39)) num << c;
     // 0x61 .. 0x7a = a .. z
     if ((c >= 0x61) && (c <= 0x7a)) color << c;
   }
-  return tuple<int, string>{std::stoi(num.str()), color.str()};
+  return tuple<int, int>{std::stoi(num.str()), color_map[color.str()]};
 }
 
 int main() {
-  ifstream infile{"input2"};
+  // ifstream infile{"input_test_2"};
   // "input_test_2" = 2286
+  ifstream infile{"input2"};
+  // "input2" = 79315
 
   size_t sum_power{};
-  map<int, map<string, int>> all_games{};
+  vector<vector<int>> all_games{};
 
   for (string line; getline(infile, line);) {
     auto line_split = split(line, ':');
@@ -49,7 +54,7 @@ int main() {
     auto game_id{std::stoi(split(line_split[0], ' ')[1])};
 
     auto games{split(line_split[1], ';')};
-    map<string, int> stats{{"red", 0}, {"green", 0}, {"blue", 0}};
+    vector<int> stats{0, 0, 0};
 
     for (auto game : games) {
       auto g_scores{split(game, ',')};
@@ -60,10 +65,10 @@ int main() {
       }
     }
 
-    auto g_power = stats["red"] * stats["green"] * stats["blue"];
+    auto g_power = stats[0] * stats[1] * stats[2];
     sum_power += g_power;
 
-    all_games[game_id] = stats;
+    all_games.push_back(stats);
   }
   print("sum power: `{}`\n", sum_power);
 }

@@ -6,6 +6,8 @@
         "string": "cpp",
         "string_view": "cpp",
         "*.tcc": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "tuple": "cpp",
+        "ranges": "cpp"
     },
 }
