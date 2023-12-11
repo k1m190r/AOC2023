@@ -17,6 +17,8 @@
         "cwchar": "cpp",
         "exception": "cpp",
         "stdexcept": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp"
     },
 }

@@ -1,6 +1,6 @@
 NAME = main
 CFILE = main
-CPP = g++-13
+CPP = g++-12
 CFLAGS = -O0 -std=c++23 -g -pthread -Wall -pedantic 
 LDLIBS = `pkg-config --libs fmt`
 

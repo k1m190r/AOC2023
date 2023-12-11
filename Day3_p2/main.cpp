@@ -161,8 +161,7 @@ int main() {
           // keep_id is is_pn_2 > 1
           int k_id = keep_id(vb);
           if (k_id > 0) keep[k_id].push_back(std::stoi(s));
-          ss.clear();
-          ss.str("");
+          ss.clear(), ss.str("");
           vb.clear();
         }
       }
@@ -176,5 +175,6 @@ int main() {
     int v2 = v[1];
     sum += (v1 * v2);
   }
-  print(":::{}\n", sum == 84584891);
+
+  print("{1} {0}\n", sum, sum == 84584891);
 }
