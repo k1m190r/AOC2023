@@ -13,6 +13,10 @@
         "type_traits": "cpp",
         "iterator": "cpp",
         "fstream": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "cwchar": "cpp",
+        "exception": "cpp",
+        "stdexcept": "cpp",
+        "utility": "cpp"
     },
 }

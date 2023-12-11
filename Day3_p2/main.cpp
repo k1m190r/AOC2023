@@ -82,31 +82,24 @@ int main() {
     is_pn_3.push_back(pn_3);
   }
 
-  // is_num_2 ← increment number shadow for each number 
+  // is_num_2 ← increment number shadow for each number
   for (size_t si = 0; si < is_num.size(); si++) {
     auto line = is_num[si];
     auto len = line.size();
     for (size_t i = 0; i < len; i++) {
       auto x = line[i];
       if (x == 1) {
+        auto inc_num_2 = [len](auto &arr, size_t si, size_t i, auto x) {
+          arr[si][i] += x;
+          if (i > 0) arr[si][i - 1] += x;
+          if (i < (len - 1)) arr[si][i + 1] += x;
+        };
         // left right
-        is_num_2[si][i] += x;
-        if (i > 0) is_num_2[si][i - 1] += x;
-        if (i < (len - 1)) is_num_2[si][i + 1] += x;
-
+        inc_num_2(is_num_2, si, i, x);
         // one level above
-        if (si > 0) {
-          is_num_2[si - 1][i] += x;
-          if (i > 0) is_num_2[si - 1][i - 1] += x;
-          if (i < (len - 1)) is_num_2[si - 1][i + 1] += x;
-        }
-
+        if (si > 0) inc_num_2(is_num_2, si - 1, i, x);
         // one leve below
-        if (si < (is_pn.size() - 1)) {
-          is_num_2[si + 1][i] += x;
-          if (i > 0) is_num_2[si + 1][i - 1] += x;
-          if (i < (len - 1)) is_num_2[si + 1][i + 1] += x;
-        }
+        if (si < (is_pn.size() - 1)) inc_num_2(is_num_2, si + 1, i, x);
       }
     }
   }
@@ -118,7 +111,6 @@ int main() {
     auto line = is_pn[si];
     auto len = line.size();
     for (size_t i = 0; i < len; i++) {
-
       // x is true if '*' and there num shadow > 1
       auto x = line[i] && (is_num_2[si][i] > 1);
 
@@ -127,26 +119,20 @@ int main() {
 
       if (x) {
         is_pn_3[si][i] = pni;
+        is_pn[si][i] = pni;
+
+        auto set_pn_2 = [len](auto &arr, size_t si, size_t i, auto x) {
+          arr[si][i] = x;
+          if (i > 0) arr[si][i - 1] = x;
+          if (i < (len - 1)) arr[si][i + 1] = x;
+        };
 
         // left right
-        is_pn[si][i] = pni;
-        is_pn_2[si][i] = pni;
-        if (i > 0) is_pn_2[si][i - 1] = pni;
-        if (i < (len - 1)) is_pn_2[si][i + 1] = pni;
-
+        set_pn_2(is_pn_2, si, i, pni);
         // one level above
-        if (si > 0) {
-          is_pn_2[si - 1][i] = pni;
-          if (i > 0) is_pn_2[si - 1][i - 1] = pni;
-          if (i < (len - 1)) is_pn_2[si - 1][i + 1] = pni;
-        }
-
+        if (si > 0) set_pn_2(is_pn_2, si - 1, i, pni);
         // one leve below
-        if (si < (is_pn.size() - 1)) {
-          is_pn_2[si + 1][i] = pni;
-          if (i > 0) is_pn_2[si + 1][i - 1] = pni;
-          if (i < (len - 1)) is_pn_2[si + 1][i + 1] = pni;
-        }
+        if (si < (is_pn.size() - 1)) set_pn_2(is_pn_2, si + 1, i, pni);
 
         pni++;
       }
@@ -190,5 +176,5 @@ int main() {
     int v2 = v[1];
     sum += (v1 * v2);
   }
-  print("sum:{}\n", sum);
+  print(":::{}\n", sum == 84584891);
 }
