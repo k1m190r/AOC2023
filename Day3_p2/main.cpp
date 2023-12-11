@@ -82,7 +82,7 @@ int main() {
     is_pn_3.push_back(pn_3);
   }
 
-  // fill the *num + shadow
+  // is_num_2 ← increment number shadow for each number 
   for (size_t si = 0; si < is_num.size(); si++) {
     auto line = is_num[si];
     auto len = line.size();
@@ -111,13 +111,15 @@ int main() {
     }
   }
 
-  // fill the *pn + shadow
+  // is_pn ← set pni for each * if number shadow is > 1
+  // is_pn_2 ← shadow equal to the pni
   int pni = 1;
   for (size_t si = 0; si < is_pn.size(); si++) {
     auto line = is_pn[si];
     auto len = line.size();
     for (size_t i = 0; i < len; i++) {
-      // x is true if '*' and there are more than 2 numbers near
+
+      // x is true if '*' and there num shadow > 1
       auto x = line[i] && (is_num_2[si][i] > 1);
 
       // update the is_pn
@@ -170,6 +172,7 @@ int main() {
 
         // clear stream and vec bool
         if (s.size() != 0) {
+          // keep_id is is_pn_2 > 1
           int k_id = keep_id(vb);
           if (k_id > 0) keep[k_id].push_back(std::stoi(s));
           ss.clear();
@@ -180,6 +183,7 @@ int main() {
     }
   }
 
+  // keep is a map: id → [v1 v2] in the shadow of each '*'
   int sum = 0;
   for (auto [k, v] : keep) {
     int v1 = v[0];
