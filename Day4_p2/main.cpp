@@ -24,7 +24,7 @@ int main() {
   // ifstream infile{"input_test_4"};
   // input_test_4 = 30
   ifstream infile{"input4"};
-  // input4 = 
+  // input4 = 5422730
 
   stringstream ss{};
   auto clear_ss = [&ss]() { ss.clear(), ss.str(""); };
