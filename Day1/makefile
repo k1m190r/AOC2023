@@ -1,4 +1,4 @@
-NAME = day1
+NAME = main
 CFILE = main
 CPP = g++-12
 CFLAGS = -O0 -std=c++20 -g -pthread

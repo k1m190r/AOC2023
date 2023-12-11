@@ -8,6 +8,11 @@
         "*.tcc": "cpp",
         "sstream": "cpp",
         "tuple": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "concepts": "cpp",
+        "type_traits": "cpp",
+        "iterator": "cpp",
+        "fstream": "cpp",
+        "map": "cpp"
     },
 }
