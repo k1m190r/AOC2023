@@ -86,6 +86,4 @@ int main() {
     sum += std::get<3>(v);
   }
   print("sum: {}\n", sum);
-
-  // print("cards.size: {}\n", cards.size());
 }

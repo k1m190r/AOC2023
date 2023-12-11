@@ -14,7 +14,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "${fileDirname}/out/${fileBasenameNoExtension}",
                 "-L/usr/local/lib",
                 "-lfmt",
             ],
