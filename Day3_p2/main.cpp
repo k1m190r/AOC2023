@@ -45,10 +45,10 @@ string i2s(vector<int> v) {
 }
 
 int main() {
-  ifstream infile{"input_test_3"};
+  // ifstream infile{"input_test_3"};
   // input3_test_3 = 467835
-  // ifstream infile{"input3"};
-  // input3 =
+  ifstream infile{"input3"};
+  // input3 = 84584891
 
   // load and make PN an is_num arrays
   vector<string> schem{};
@@ -125,7 +125,6 @@ int main() {
 
       if (x) {
         is_pn_3[si][i] = pni;
-        print("pni: {} {} {}\n", si, i, pni);
 
         // left right
         is_pn[si][i] = pni;
@@ -151,26 +150,6 @@ int main() {
       }
     }
   }
-
-  print("is_pn\n");
-  for (auto line : is_pn) print("{}\n", b2s(line));
-  print("\n");
-
-  print("is_num\n");
-  for (auto line : is_num) print("{}\n", i2s(line));
-  print("\n");
-
-  print("is_pn_2\n");
-  for (auto line : is_pn_2) print("{}\n", i2s(line));
-  print("\n");
-
-  print("is_num_2\n");
-  for (auto line : is_num_2) print("{}\n", i2s(line));
-  print("\n");
-
-  print("is_pn_3\n");
-  for (auto line : is_pn_3) print("{}\n", i2s(line));
-  print("\n");
 
   // keep the nums
   map<int, vector<int>> keep{};
@@ -202,6 +181,10 @@ int main() {
   }
 
   int sum = 0;
-  for(auto [k, v]: keep)
-    print("{}: {}", k, v);
+  for (auto [k, v] : keep) {
+    int v1 = v[0];
+    int v2 = v[1];
+    sum += (v1 * v2);
+  }
+  print("sum:{}\n", sum);
 }
