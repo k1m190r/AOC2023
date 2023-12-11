@@ -23,16 +23,10 @@ char what(char c) {
   return 2;
 }
 
-vector<bool> _and_(vector<bool> a, vector<bool> b) {
-  vector<bool> retval(a.size());
-  for (size_t i = 0; i < a.size(); i++) retval[i] = a[i] & b[i];
-  return retval;
-}
-
-vector<bool> _or_(vector<bool> a, vector<bool> b) {
-  vector<bool> retval(a.size());
-  for (size_t i = 0; i < a.size(); i++) retval[i] = a[i] | b[i];
-  return retval;
+bool or_reduce(vector<bool> a) {
+  for (size_t i = 0; i < a.size(); i++)
+    if (a[i]) return true;
+  return false;
 }
 
 string b2s(vector<bool> v) {
@@ -43,8 +37,10 @@ string b2s(vector<bool> v) {
 }
 
 int main() {
-  ifstream infile{"input_test_3"};
+  // ifstream infile{"input_test_3"};
   // input3_test_3 = 4361
+  ifstream infile{"input3"};
+  // input3 = 540025
 
   // load and make PN an is_num arrays
   vector<string> schem{};
@@ -101,18 +97,36 @@ int main() {
     }
   }
 
-  for (size_t i = 0; i < is_pn_2.size(); i++)
-    print("{}:{}\n", i, b2s(is_pn_2[i]));
-  print("\n\n");
+  // keep the nums
+  stringstream ss{};
+  vector<bool> vb{};
+  vector<int> keep_nums{};
 
-  for (size_t i = 0; i < is_num.size(); i++)
-    print("{}:{}\n", i, b2s(is_num[i]));
+  for (size_t si = 0; si < schem.size(); si++) {
+    for (size_t i = 0; i < schem[si].size(); i++) {
+      
+      auto c = schem[si][i];
+      auto b = is_pn_2[si][i];
 
-  // perhaps use bit operations... is_num is_pn?
-  // got through ∀ symbol twice
-  // 1st to find all non-num and non-.
-  //   each non symbol cast a shadow around itself 1 cell wide
-  // 2nd is collect all the numbers that in the shadow of numbers
+      if ((c >= 0x30) && (c <= 0x39)) {
+        ss << c;
+        vb.push_back(b);
+      } else {
+        auto s = ss.str();
 
-  // data struct is vector of vectors 1st elem is 2nd is bool is_part
+        // clear stream and vec bool
+        if (s.size() != 0) {
+          bool keep = or_reduce(vb);
+          if (keep) keep_nums.push_back(std::stoi(s));
+          ss.clear();
+          ss.str("");
+          vb.clear();
+        }
+      }
+    }
+  }
+
+  int sum_nums = 0;
+  for (auto n : keep_nums) sum_nums += n;
+  print("{}\n", sum_nums);
 }
