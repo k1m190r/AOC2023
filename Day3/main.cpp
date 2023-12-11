@@ -104,7 +104,7 @@ int main() {
 
   for (size_t si = 0; si < schem.size(); si++) {
     for (size_t i = 0; i < schem[si].size(); i++) {
-      
+
       auto c = schem[si][i];
       auto b = is_pn_2[si][i];
 
@@ -126,6 +126,7 @@ int main() {
     }
   }
 
+  // final sum
   int sum_nums = 0;
   for (auto n : keep_nums) sum_nums += n;
   print("{}\n", sum_nums);
