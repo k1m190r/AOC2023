@@ -21,14 +21,14 @@ using std::vector, std::map, std::tuple;
 auto is_dig = [](char c) { return (c >= 0x30) && (c <= 0x39); };
 
 int main() {
-  ifstream infile{"input_test_4"};
-  // input_test_4 =
-  // ifstream infile{"input4"};
-  // input4 = 24733
+  // ifstream infile{"input_test_4"};
+  // input_test_4 = 30
+  ifstream infile{"input4"};
+  // input4 = 
 
   stringstream ss{};
   auto clear_ss = [&ss]() { ss.clear(), ss.str(""); };
-  // map: card id → [win nums, my nums]
+  // map: card id → [win nums, my nums, count, score]
   map<int, tuple<vector<int>, vector<int>, int, int>> cards{};
 
   for (string line; getline(infile, line);) {
@@ -81,11 +81,20 @@ int main() {
         wins, nums, n_wins, pow(2, n_wins - 1));
   }
 
-  int sum = 0;
-  for (auto [k, v] : cards) {
-    sum += std::get<3>(v);
-  }
-  print("sum: {}\n", sum);
+  vector<int> card_counts(cards.size() + 1);
 
-  // print("cards.size: {}\n", cards.size());
+  // set initial counts
+  for (auto [k, v] : cards) card_counts[k] = 1;
+
+  // increment
+  for (auto [k, v] : cards) {
+    auto m = std::get<2>(v);
+    auto inc = card_counts[k];
+    for (int i = k + 1; i <= k + m; i++) card_counts[i] += inc;
+  }
+
+  int sum = 0;
+  for (auto x : card_counts) sum += x;
+
+  print("N cards: `{}`\n", sum);
 }
