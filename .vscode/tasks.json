@@ -5,7 +5,7 @@
             "label": "C/C++: g++-12 build active file",
             "command": "/usr/bin/g++-12",
             "args": [
-                "-O0",
+                "-O3",
                 "-std=c++23",
                 "-Wall",
                 "-pedantic",
